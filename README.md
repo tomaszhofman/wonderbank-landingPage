@@ -2,7 +2,7 @@
 
 ## Table of contents
 * [General info](#general-info)
-* [Technologies](#technologies)Cancel Changes
+* [Technologies](#technologies)
 * [Demo](#demo)
 
 ## General info
@@ -15,9 +15,5 @@ Project is created with:
 * CSS
 	
 ## Demo
-
-A mobile-first personal blog website designed and built from scratch using HTML and CSS. Layouts are made with CSS grid along with flexbox. This project is made as part of the Udacity Front End Developer Nanodegree Program.
-
-![Clean Studio](https://user-images.githubusercontent.com/47089511/109669175-290ae480-7b72-11eb-9510-8d6f72357851.png)
 
 [Live Demo](https://wonderbank.netlify.app)
