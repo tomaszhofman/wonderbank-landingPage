@@ -2,6 +2,40 @@ const nav = document.querySelector('.grid-navbar');
 const link = document.querySelector('.nav-link');
 const section1 = document.querySelector('#section-1');
 const img = document.querySelectorAll('.anim');
+const navItems = document.querySelector('.nav-items');
+
+const sections = document.querySelectorAll('[data-section]');
+
+// create nav
+
+const names = [
+  { key: 'Home' },
+  { key: 'Idea' },
+  { key: 'How To Start' },
+  { key: 'Contact' },
+];
+
+sections.forEach((section, i) => {
+  const li = document.createElement('li');
+  const anchorTag = document.createElement('a');
+  const linkTextAchorTag = `#section-${i}`;
+
+  anchorTag.setAttribute('href', linkTextAchorTag);
+  anchorTag.classList.add('nav-link');
+  // names.map((name) => (anchorTag.textContent = `${name.key}`));
+
+  anchorTag.textContent = names[i].key;
+
+  if (anchorTag.textContent.includes('Home')) {
+    anchorTag.classList.add('active');
+  }
+
+  li.append(anchorTag);
+  li.classList.add('nav-item');
+
+  navItems.append(li);
+  console.log(navItems);
+});
 
 nav.addEventListener('click', function (e) {
   e.preventDefault();
@@ -55,13 +89,21 @@ img.forEach((img) => {
 
 // Intersection observer sticky nav
 
-navObserver = new IntersectionObserver((entries) => {
+const navObsOptions = {
+  threshold: 0.45,
+  rootMargin: '-90px',
+};
+
+const navObserver = new IntersectionObserver((entries) => {
   const [entry] = entries;
+  console.log(entry, 'nav');
 
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
   }
-});
+}, navObsOptions);
 navObserver.observe(nav);
 
 // Cookie message
@@ -80,4 +122,27 @@ console.log(cookieMsg);
 
 cookieMsg.addEventListener('click', function () {
   cookieMsg.remove();
+});
+
+const options = {
+  threshold: 0.6,
+};
+
+const changeNav = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+      console.log(entry.target);
+      document.querySelector('.active').classList.remove('active');
+
+      const id = entry.target.getAttribute('id');
+
+      document.querySelector(`[href="#${id}"]`).classList.add('active');
+    }
+  });
+};
+
+const sectionObserver = new IntersectionObserver(changeNav, options);
+
+sections.forEach((section) => {
+  sectionObserver.observe(section);
 });

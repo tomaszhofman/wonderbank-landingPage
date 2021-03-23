@@ -675,3 +675,7 @@ $breakpoints-down: (
 .close-btn::after {
   transform: rotate(-45deg);
 }
+
+.active {
+  color: var(--color-primary) !important;
+}
